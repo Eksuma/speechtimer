@@ -182,16 +182,14 @@ function toggleSettings()
 {
 	const settingsDiv = document.querySelector('#settings');
 
-	if (settingsDiv.style.display === "none" || settingsDiv.style.display === "")
-	{
-		settingsDiv.style.display = "inline-grid";
-		settingsButton.innerHTML = "&#x2BC6; Settings &#x2BC6;";
-	}
-	else
-	{
-		settingsDiv.style.display = "none";
-		settingsButton.innerHTML = "&#x2BC8; Settings &#x2BC7;";
-	}
+	settingsButton.classList.toggle("change");
+
+	settingsDiv.classList.toggle("showIt");
+
+	// if (settingsDiv.style.display === "none" || settingsDiv.style.display === "")
+	// 	settingsDiv.style.display = "inline-grid";
+	// else
+	// 	settingsDiv.style.display = "none";
 }
 
 // hacky hack hack
