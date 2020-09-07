@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="fi">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Timer with a countdown">
+	<meta name="keywords" content="timer, countdown, text-to-speech, talking">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Timer</title>
+
+	<link href="speechtimer.css" rel="stylesheet">
+</head>
+
+<body>
+
+<noscript><h3 class="error">JavaScript is not enabled!</h3></noscript>
+
+<div class="layout">
+
+	<div class="oneCol">
+		<div id="digits">
+			<span id="minussign">-</span><!--<span id="hours">00</span>:--><span id="minutes">00</span>:<span id="seconds">00</span>.<span id="hundredths">00</span><span style="visibility: hidden">-</span>
+		</div>
+	</div>
+
+	<div class="alignRight"><button id="startButton">Start</button></div>
+	<div class="alignLeft"><button id="resetButton">Reset</button></div>
+
+	<div class="oneCol">
+		<button id="toggleSettings">&#x2BC8; Settings &#x2BC7;</button>
+	</div>
+
+	<div class="oneCol">
+		<div id="settings">
+			<div><label for="countdownLength">Countdown length</label></div>
+			<div>
+				<select id="countdownLength" class="wideInput" name="drop0">
+					<option value="30">30 seconds</option>
+					<option value="15">15 seconds</option>
+					<option value="10">10 seconds</option>
+					<option value="5" selected>&nbsp;5 seconds</option>
+					<option value="3">&nbsp;3 seconds</option>
+					<option value="0">none</option>
+				</select>
+			</div>
+
+			<div><label for="tellInterval">Time tell interval</label></div>
+			<div>
+				<select id="tellInterval" class="wideInput" name="drop1">
+					<option value="60">60 seconds</option>
+					<option value="30">30 seconds</option>
+					<option value="15">15 seconds</option>
+					<option value="10" selected>10 seconds</option>
+					<option value="5">&nbsp;5 seconds</option>
+					<option value="0">none</option>
+				</select>
+			</div>
+
+			<div><label for="voiceType">Voice</label></div>
+			<div><select id="voiceType" class="wideInput" name="drop2"><!--<option value="0">Voice #1</option>--></select></div>
+
+			<div><label for="voiceVolume">Volume:</label> <span id="volumeNumber"></span></div>
+			<div><input id="voiceVolume" class="wideInput slider" type="range" min="0.0" max="1.0" step="0.01" value="0.5"/></div>
+
+			<div><label for="voiceRate">Rate:</label> <span id="rateNumber"></span></div>
+			<div><input id="voiceRate" class="wideInput slider" type="range" min="0.1" max="2.0" step="0.01" value="1.05"/></div>
+
+			<div><label for="voicePitch">Pitch:</label> <span id="pitchNumber"></span></div>
+			<div><input id="voicePitch" class="wideInput slider" type="range" min="0.0" max="2.0" step="0.02" value="1.0"/></div>
+		</div>
+	</div>
+
+</div>
+
+<script src="speechtimer.js"></script>
+
+</body>
+</html>
