@@ -33,8 +33,8 @@ const updateInterval = 50; // in milliseconds
 
 var startTime = 0;
 var elapsedTime = 0;
-var previousTime = 0;
-var previousLapse = 0;
+var timeBeforePause = 0;
+var prevSecsElapsed = 0;
 
 var intervalId = 0;
 var mainFunction = beginCountdown;
@@ -149,7 +149,7 @@ function updateTimer()
 {
 	const currentTime = timestamp();
 
-	elapsedTime = previousLapse + (currentTime - startTime);
+	elapsedTime = timeBeforePause + (currentTime - startTime);
 
 	updateDigits();
 }
@@ -160,8 +160,8 @@ function resetTimer()
 	intervalId = 0;
 
 	elapsedTime = 0;
-	previousTime = 0;
-	previousLapse = 0;
+	prevSecsElapsed = 0;
+	timeBeforePause = 0;
 
 	updateDigits();
 
@@ -173,7 +173,7 @@ function pauseTimer()
 	clearInterval(intervalId);
 	intervalId = 0;
 
-	previousLapse = elapsedTime;
+	timeBeforePause = elapsedTime;
 
 	changeMainButton('Resume', startTimer, "green");
 }
@@ -183,13 +183,7 @@ function toggleSettings()
 	const settingsDiv = document.querySelector('#settings');
 
 	settingsButton.classList.toggle("change");
-
 	settingsDiv.classList.toggle("showIt");
-
-	// if (settingsDiv.style.display === "none" || settingsDiv.style.display === "")
-	// 	settingsDiv.style.display = "inline-grid";
-	// else
-	// 	settingsDiv.style.display = "none";
 }
 
 // hacky hack hack
@@ -199,17 +193,25 @@ function updateDigits()
 	const secondsElapsed = Math.floor(elapsedTime / 1000);
 	const absSecondsElapsed = Math.abs((elapsedTime / 1000) | 0); // different from floor!
 
+	//
+	// set sign if time is negative
+	//
+
 	// on reset
-	if (elapsedTime === 0 && previousTime === 0)
+	if (secondsElapsed === 0 && prevSecsElapsed === 0)
 		timeSign.style.visibility = "hidden";
 
 	// starting negative
-	if (elapsedTime < 0 && previousTime >= 0)
+	if (secondsElapsed < 0 && prevSecsElapsed >= 0)
 		timeSign.style.visibility = "visible";
 
 	// crossing to positive
-	if (elapsedTime >= 0 && previousTime < 0)
+	if (secondsElapsed >= 0 && prevSecsElapsed < 0)
 		timeSign.style.visibility = "hidden";
+
+	//
+	// set digits
+	//
 
 	const cents = Math.floor((absElapsedTime / 10) % 100);
 	const secs = Math.floor(absSecondsElapsed % 60);
@@ -235,7 +237,7 @@ function updateDigits()
 		// special cases during countdown
 		if (secondsElapsed <= 0)
 		{
-			if (previousTime !== secondsElapsed)
+			if (prevSecsElapsed !== secondsElapsed)
 			{
 				// 3, 2, 1
 				if (secondsElapsed >= -3 && secondsElapsed <= -1)
@@ -248,7 +250,7 @@ function updateDigits()
 		}
 		else // normal timer
 		{
-			const prevInt = Math.floor(previousTime / reportInterval);
+			const prevInt = Math.floor(prevSecsElapsed / reportInterval);
 			const currInt = Math.floor(secondsElapsed / reportInterval);
 
 			if (prevInt !== currInt)
@@ -266,7 +268,7 @@ function updateDigits()
 		}
 	}
 
-	previousTime = secondsElapsed;
+	prevSecsElapsed = secondsElapsed;
 }
 
 function setAllListeners()
