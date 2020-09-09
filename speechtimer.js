@@ -98,8 +98,8 @@ function speak(text, callback)
 {
 	console.log("speak " + (++numSpeakCalls) + ": " + text);
 
-	// if (speechSynthesis.speaking)
-	speechSynthesis.cancel();
+	if (speechSynthesis.speaking)
+		speechSynthesis.cancel();
 
 	var voices = speechSynthesis.getVoices();
 
