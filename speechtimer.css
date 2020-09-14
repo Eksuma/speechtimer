@@ -5,49 +5,52 @@
 body {
 	text-align: center;
 	font-family: Open Sans, Verdana, sans-serif;
-	/* background-color: black; */
+	color: #555;
 }
 
-.layout {
-	display: grid;
-	grid-gap: 10px;
-	grid-template-columns: 50% 50%;
+/* hmm: https://material.io/design/color/dark-theme.html */
 
-	width: 80%;
-	margin: auto;
+@media (prefers-color-scheme: dark) {
+	body {
+		color: #999;
+		background: #121212;
+	}
 }
 
-.oneCol {
-	grid-column: 1 / span 2;
+#buttons {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	padding: 20px;
 }
 
-.alignRight {
+.leftside {
+	width: 50%;
 	text-align: right;
-	height: 80px;
+	margin-right: 3px;
 }
 
-.alignLeft {
+.rightside {
+	width: 50%;
 	text-align: left;
-	height: 80px;
-	white-space: nowrap;
+	margin-left: 3px;
+}
+
+#bundle {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
 }
 
 h3.error {
 	color: red;
 }
 
-div {
-	/* background-color: rgba(255, 0, 0, 0.1); */
-}
-
-div#digits {
+#digits {
 	display: inline-block;
-	font-size: 10vw;
-	/* font-weight: 100; */
+	/* font-size: max(10vw, 25px); */
+	font-size: calc(8vw + 25px);
 	margin: 15px;
-	/* border: 10px solid rgba(255, 0, 0, 0.2); */
-	/* border-radius: 25% / 50%; */
-	color: #555;
 }
 
 #minussign {
@@ -70,25 +73,23 @@ div#digits {
 
 #settings > div {
 	background-color: rgba(255, 255, 255, 0.8);
-	/* border: 1px solid rgba(0, 0, 0, 0.8); */
+
 	padding: 10px;
 	font-size: 16px;
 	text-align: right;
+	color: black;
 }
 
 #settings span {
 	font-weight: bold;
 }
 
-.wideInput {
+#settings select {
 	width: 100%;
 }
 
 #settings input[type=range] {
 	margin: 0px;
-}
-
-#settings input[type=text] {
 	width: 100%;
 }
 
@@ -98,14 +99,15 @@ button {
 
 #startButton, #resetButton {
 	height: 100%;
-	width: 30%;
-	min-width: 2cm;
+	width: 15vw;
+	min-width: 200px;
+
+	overflow: hidden;
 
 	opacity: 0.5;
 	border: 3px solid rgba(0, 0, 0, 0.2);
 	color: white;
-	padding: 15px 32px;
-	/* padding: 10% 20%; */
+
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -125,16 +127,21 @@ button {
 
 
 
+/* settings button */
+
+
+
 .burgercontainer {
 	display: inline-block;
 	cursor: pointer;
 	width: 80px;
 	height: 80px;
-	background-color: skyblue;
+	background-color: rgb(15, 157, 215);
+	opacity: 0.5;
 	border-radius: 50%;
 	padding: 10px;
 	border: 3px solid rgba(0, 0, 0, 0.2);
-	margin-left: 5px;
+	margin-left: 6px;
 	vertical-align: top; /* bottom?? */
 }
 
@@ -143,8 +150,9 @@ button {
 
 	width: calc(100% - var(--gapSize) * 2);
 	height: var(--gapSize);
-	background-color: #467;
 	margin: var(--gapSize);
+
+	background-color: #04232f;
 	transition: 0.4s;
 }
 
