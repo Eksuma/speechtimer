@@ -96,7 +96,7 @@ button {
 #startButton, #resetButton {
 	height: 100%;
 	width: 15vw;
-	min-width: 150px;
+	min-width: 100px;
 
 	overflow: hidden;
 
