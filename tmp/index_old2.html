@@ -17,30 +17,25 @@
 <noscript><h3 class="error">JavaScript is not enabled!</h3></noscript>
 
 <div id="digits">
-	<span id="minussign" class="lowlight">-</span><!--
-	--><span id="digit7">0</span><!--
-	--><span id="digit6">0</span><!--
-	--><span id="digit5">:</span><!--
-	--><span id="digit4">0</span><!--
-	--><span id="digit3">0</span><!--
-	--><span id="digit2">.</span><!--
-	--><span id="digit1">0</span><!--
-	--><span id="digit0">0</span><!--
-	--><span style="visibility: hidden">-</span>
+	<span id="minussign">-</span><!--<span id="hours">00</span>:--><span id="minutes">00</span>:<span id="seconds">00</span>.<span id="hundredths">00</span><span style="visibility: hidden">-</span>
 </div>
 
 <div id="buttons">
-	<div>
-		<button id="startButton" class="start">Start</button>
+	<div class="leftside">
+		<button id="startButton">Start</button>
 	</div>
-	<div>
-		<button id="resetButton" class="reset">Reset</button>
-	</div>
-	<div>
-		<div id="toggleSettings" class="burgercontainer">
-			<div class="bar1"></div>
-			<div class="bar2"></div>
-			<div class="bar3"></div>
+	<div class="rightside">
+		<div id="bundle">
+			<div>
+				<button id="resetButton">Reset</button>
+			</div>
+			<div>
+				<div class="burgercontainer" id="toggleSettings">
+					<div class="bar1"></div>
+					<div class="bar2"></div>
+					<div class="bar3"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

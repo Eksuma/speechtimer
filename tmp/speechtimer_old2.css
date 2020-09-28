@@ -21,12 +21,25 @@ body {
 	display: flex;
 	flex-wrap: nowrap;
 	justify-content: center;
-
-	margin-top: 20px;
+	padding: 20px;
 }
 
-#buttons > div {
-	margin: 3px;
+.leftside {
+	width: 50%;
+	text-align: right;
+	margin-right: 3px;
+}
+
+.rightside {
+	width: 50%;
+	text-align: left;
+	margin-left: 3px;
+}
+
+#bundle {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
 }
 
 h3.error {
@@ -44,14 +57,6 @@ h3.error {
 	visibility: hidden;
 }
 
-.highlight {
-	opacity: 1.0;
-}
-
-.lowlight {
-	opacity: 0.4;
-}
-
 #settings {
 	/* display: inline-grid; */
 	display: none;
@@ -59,7 +64,6 @@ h3.error {
 	grid-template-columns: auto auto;
 	grid-gap: 2px 2px;
 	background-color: #2196F3;
-	margin-top: 3px;
 	padding: 5px;
 }
 
@@ -96,7 +100,7 @@ button {
 #startButton, #resetButton {
 	height: 100%;
 	width: 15vw;
-	min-width: 150px;
+	min-width: 200px;
 
 	overflow: hidden;
 
@@ -113,21 +117,15 @@ button {
 	margin: 0;
 }
 
-.start {
+#startButton {
 	background-color: green;
 }
 
-.pause {
-	background-color: red;
-}
-
-.resume {
-	background-color: green;
-}
-
-.reset {
+#resetButton {
 	background-color: grey;
 }
+
+
 
 /* settings button */
 
@@ -143,6 +141,7 @@ button {
 	border-radius: 50%;
 	padding: 10px;
 	border: 3px solid rgba(0, 0, 0, 0.2);
+	margin-left: 6px;
 	vertical-align: top; /* bottom?? */
 }
 

@@ -13,23 +13,19 @@ const rate = document.querySelector('#voiceRate');
 const pitch = document.querySelector('#voicePitch');
 
 const timeSign = document.querySelector("#minussign");
-
-const digitElems = [];
-const digitChars = [];
-
-const numDigits = 8;
-
-for (let i = 0; i < numDigits; i++) {
-	digitElems.push(document.querySelector(`#digit${i}`));
-	digitChars.push(digitElems[i].textContent);
-}
+const hundredthsValue = document.querySelector('#hundredths');
+const secondsValue = document.querySelector('#seconds');
+const minutesValue = document.querySelector('#minutes');
+// const hoursValue = document.querySelector('#hours');
 
 const settingsButton = document.querySelector('#toggleSettings');
 const startButton = document.querySelector('#startButton');
 const resetButton = document.querySelector('#resetButton');
 
 const timestamp = ((performance && performance.now) ? performance.now.bind(performance) : Date.now.bind(Date));
-const updateIntervalMs = 50;
+// const timestamp = () => performance.now() / 10; // debug
+
+const updateInterval = 50; // in milliseconds
 
 //
 // actual variables
@@ -133,22 +129,20 @@ function beginCountdown()
 	startTimer(afterSeconds * 1000); // to milliseconds
 }
 
-function changeMainButton(text, func, className)
+function changeMainButton(text, func, color)
 {
 	startButton.innerHTML = text;
 	mainFunction = func;
-
-	startButton.classList.remove("start", "pause", "resume");
-	startButton.classList.add(className);
+	startButton.style.backgroundColor = color;
 }
 
 function startTimer(startDelay = 0)
 {
 	clearInterval(intervalId);
 	startTime = timestamp() + startDelay;
-	intervalId = setInterval(updateTimer, updateIntervalMs);
+	intervalId = setInterval(updateTimer, updateInterval);
 
-	changeMainButton('Pause', pauseTimer, "pause");
+	changeMainButton('Pause', pauseTimer, "red");
 }
 
 function updateTimer()
@@ -171,10 +165,7 @@ function resetTimer()
 
 	updateDigits();
 
-	for (const elem of digitElems)
-		elem.classList.remove("lowlight");
-
-	changeMainButton('Start', beginCountdown, "start");
+	changeMainButton('Start', beginCountdown, "green");
 }
 
 function pauseTimer()
@@ -184,7 +175,7 @@ function pauseTimer()
 
 	timeBeforePause = elapsedTime;
 
-	changeMainButton('Resume', startTimer, "resume");
+	changeMainButton('Resume', startTimer, "green");
 }
 
 function toggleSettings()
@@ -227,25 +218,12 @@ function updateDigits()
 	const mins = Math.floor(absSecondsElapsed / 60) % 60;
 	// const hours = Math.floor(absSecondsElapsed / 3600);
 
-	digitChars[7] = Math.floor(mins / 10);
-	digitChars[6] = Math.floor(mins % 10);
-	digitChars[5] = ':';
-	digitChars[4] = Math.floor(secs / 10);
-	digitChars[3] = Math.floor(secs % 10);
-	digitChars[2] = '.';
-	digitChars[1] = Math.floor(cents / 10);
-	digitChars[0] = Math.floor(cents % 10);
+	const padlead = num => num.toString().padStart(2, '0');
 
-	var lowlight = true;
-
-	for (let i = 7; i >= 0; i--)
-	{
-		if (digitChars[i] > 0)
-			lowlight = false;
-
-		digitElems[i].classList[((lowlight) ? "add" : "remove")]("lowlight");
-		digitElems[i].textContent = digitChars[i];
-	}
+	hundredthsValue.textContent = padlead(cents);
+	secondsValue.textContent = padlead(secs);
+	minutesValue.textContent = padlead(mins);
+	// hoursValue.textContent = padlead(hours);
 
 	//
 	// tell time
